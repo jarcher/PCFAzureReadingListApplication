@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: "mysql/mysql-server"
+    image: "mysql/mysql-server:latest"
     ports:
       - "3306:3306"
     environment:
@@ -9,15 +9,22 @@ services:
       MYSQL_DATABASE: readinglist
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-
+   
+  api:
+    image: "ravitella/docker-springboot-recommendationservice"
+    ports:
+      - "8080:8080"
+      
   web:
     depends_on:
       - mysql
-    image: "ravitella/docker-springboot-mysql:latest"
+      - api
+    image: "ravitella/docker-springboot-readinglistapplication:latest"
     ports:
-      - "80:8080"
+      - "80:7070"
     environment:
       spring.datasource.url: jdbc:mysql://mysql:3306/readinglist?useSSL=false
       spring.datasource.username: user
       spring.datasource.password: password
+      externalAPI.recommendationAPIURL: http://api:8080/recommendations
     restart: on-failure
