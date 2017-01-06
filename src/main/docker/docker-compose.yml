@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: password
    
   api:
-    image: "ravitella/docker-springboot-recommendationservice"
+    image: "ravitella/docker-springboot-recommendationservice:latest"
     ports:
       - "8080:8080"
       

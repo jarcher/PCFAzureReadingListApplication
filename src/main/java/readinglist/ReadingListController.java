@@ -71,6 +71,7 @@ public class ReadingListController {
 		ModelAndView model = new ModelAndView("editReadingList");
 		Book book = readingListRepository.findOne(Long.parseLong(id));
 		model.addObject("book", book);
+		model.addObject("serverIP", this.ipaddress);
 		return model;
 	}
 
