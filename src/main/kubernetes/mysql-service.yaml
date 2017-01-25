@@ -10,4 +10,4 @@ spec:
     - port: 3306
   # Label keys and values that must match in order to receive traffic for this service.
   selector:
-    name: mysql
+     run: mysql
